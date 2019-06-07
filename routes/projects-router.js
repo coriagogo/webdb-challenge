@@ -49,4 +49,30 @@ router.get('/:id/actions', (req, res) => {
     })
 });
 
+router.put('/:id', (req, res) => {
+  const { id } = req.params;
+  db('projects')
+    .where({ id })
+    .update(req.body)
+    .then(project => {
+      res.status(200).json(project);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    })
+});
+
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+  db('projects')
+    .where({ id })
+    .del()
+    .then(project => {
+      res.status(200).json(project);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    })
+});
+
 module.exports = router;
