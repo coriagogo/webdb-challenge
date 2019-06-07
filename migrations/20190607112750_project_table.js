@@ -4,12 +4,12 @@ exports.up = function(knex, Promise) {
     tbl.increments();
 
     tbl
-      .string('name')
+      .string('project_name', 255)
       .notNullable()
       .unique();
 
     tbl
-      .string('description')
+      .string('description', 255)
       .notNullable();
 
     tbl

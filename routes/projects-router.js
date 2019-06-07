@@ -8,10 +8,10 @@ router.post('/', (req, res) => {
   db('projects')
     .insert(req.body)
     .then(project => {
-      return res.status(201).json(project);
+      res.status(201).json(project);
     })
     .catch(error => {
-      return res.status(400).json(error);
+      res.status(500).json(error);
     })
 });
 
@@ -21,7 +21,31 @@ router.get('/', (req, res) => {
       res.status(200).json(projects);
     })
     .catch(error => {
-      res.status(404).json(error);
+      res.status(500).json(error);
+    })
+});
+
+router.get('/:id', (req, res) => {
+  const { id } = req.params;
+  db('projects')
+    .where ({ id })
+    .then(project => {
+      res.status(200).json(project);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    })
+});
+
+router.get('/:id/actions', (req, res) => {
+  const { id } = req.params;
+  db('actions')
+    .where({ project_id: id })
+    .then(actions => {
+      res.status(200).json(actions);
+    })
+    .catch(error => {
+      res.status(500).json(error);
     })
 });
 

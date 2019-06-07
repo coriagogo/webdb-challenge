@@ -14,4 +14,14 @@ router.get('/', (req, res) => {
     })
 });
 
+router.post('/', (req, res) => {
+  db('actions')
+    .insert(req.body)
+    .then(actions => {
+      res.status(201).json(actions);
+    })
+    .catch(error => {
+      res.status(400).json(error);
+    })
+})
 module.exports = router;
