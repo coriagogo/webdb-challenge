@@ -19,8 +19,8 @@ exports.seed = function(knex, Promise) {
         },
         {
           project_id: 1, 
-          description: 'Describe action 2',
-          notes: 'Notes for action 2',
+          description: 'Describe action 3',
+          notes: 'Notes for action 3',
           completed: false
         },
         

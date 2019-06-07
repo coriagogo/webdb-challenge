@@ -14,6 +14,18 @@ router.get('/', (req, res) => {
     })
 });
 
+router.get('/:id', (req, res) => {
+  const { id } = req.params;
+  db('actions')
+    .where ({ id })
+    .then(action => {
+      res.status(200).json(action);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    })
+});
+
 router.post('/', (req, res) => {
   db('actions')
     .insert(req.body)
@@ -23,5 +35,31 @@ router.post('/', (req, res) => {
     .catch(error => {
       res.status(400).json(error);
     })
-})
+});
+
+router.put('/:id', (req, res) => {
+  const { id } = req.params;
+  db('actions')
+    .where({ id })
+    .update(req.body)
+    .then(action => {
+      res.status(200).json(action);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    })
+});
+
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+  db('actions')
+    .where({ id })
+    .del()
+    .then(action => {
+      res.status(200).json(action);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    })
+});
 module.exports = router;
